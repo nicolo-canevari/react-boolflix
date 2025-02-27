@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { searchMovies } from '../api/tmdb';
+// import MovieSearch from '../components/MovieSearch';
 import MovieList from '../components/MovieList';
 
 function Home() {
@@ -15,7 +16,7 @@ function Home() {
     const navigate = useNavigate();
 
     // Funzione per gestire la ricerca dei film
-    const handleSearch = async () => {
+    const handleSearch = async (query) => {
 
         // .trim per rimuovere gli spazi bianchi all'inizio e alla fine della riga
         if (query.trim()) {
