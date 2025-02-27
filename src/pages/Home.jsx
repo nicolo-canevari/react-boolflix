@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getPosterUrl, searchMovies, searchTVShows } from '../api/tmdb';
-import MovieSearch from '../components/MovieSearch';
+import Header from '../components/Header';
 import MovieList from '../components/MovieList';
 
 function Home() {
 
-    // Stato per la query di ricerca
-    const [query, setQuery] = useState('');
+    // Hook per la navigazione
+    const navigate = useNavigate();
 
     // Stato per i risultati dei film
     const [results, setResults] = useState([]);
 
-    // Hook per la navigazione
-    const navigate = useNavigate();
 
     // Funzione per gestire la ricerca dei film
     const handleSearch = (query) => {
@@ -71,12 +69,7 @@ function Home() {
 
         <div className="home">
 
-            <h1>BoolFlix 🎬</h1>
-
-            <MovieSearch
-                query={query}
-                setQuery={setQuery}
-                onSearch={handleSearch} />
+            <Header onSearch={handleSearch} />
 
             <MovieList
                 movies={results}

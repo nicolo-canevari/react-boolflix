@@ -18,8 +18,10 @@ function App() {
 
           {/* Rotta principale che mostra la pagina Home */}
           <Route path="/" element={<Home />} />
+
           {/* Rotta che mostra i dettagli del film con ID dinamico */}
           <Route path="/movie/:id" element={<MovieDetailsPage />} />
+
           {/* Rotta che mostra i dettagli delle serie TV con ID dinamico */}
           <Route path="/tv/:id" element={<MovieDetailsPage />} />
 
