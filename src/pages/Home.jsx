@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { searchMovies } from '../api/tmdb';
+import MovieList from '../components/MovieList';
 
 function Home() {
 
@@ -47,7 +48,6 @@ function Home() {
                     placeholder="Cerca un film..."
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-
                 />
 
                 <button onClick={handleSearch}>Cerca</button>
@@ -55,30 +55,10 @@ function Home() {
             </div>
 
             {/* Lista dei film trovati */}
-            <div className="movie-list">
-
-                {movies.map((movie) => (
-
-                    <div
-                        key={movie.id}
-                        className="movie-item"
-                        onClick={() => navigate(`/movie/${movie.id}`)}
-
-                    >
-
-                        <h3>{movie.title}</h3>
-
-                        <p>Titolo originale: {movie.original_title}</p>
-                        <p>Lingua: {movie.original_language}</p>
-                        <p>Voto: {movie.vote_average}</p>
-
-                    </div>
-
-                ))}
-
-            </div>
+            <MovieList movies={movies} />
 
         </div>
+
 
     );
 

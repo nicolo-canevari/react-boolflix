@@ -13,7 +13,7 @@ const apiClient = axios.create({
 
     params: {
 
-        // Aggiungol'API key come parametro fisso a ogni chiamata
+        // Aggiungo l'API key come parametro fisso a ogni chiamata
         api_key: API_KEY,
 
     },
