@@ -1,4 +1,9 @@
-// CARD PER VISUALIZZARE LE INFO DI OGNI FILM
+// CARD PER VISUALIZZARE LE INFO DI OGNI FILM / SERIE TV
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faStar as faStarFull } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
+import { getStarRating } from '../api/tmdb';
+
 
 function MovieCard({ movie, onClick }) {
 
@@ -21,6 +26,8 @@ function MovieCard({ movie, onClick }) {
         // Restituisce la bandiera se esiste, altrimenti mostra 🏳️
         return languageToCountry[language] || '🏳️';
     }
+
+    const starRating = getStarRating(movie.vote);
 
     return (
 
@@ -45,7 +52,20 @@ function MovieCard({ movie, onClick }) {
             <p>
                 Lingua: {movie.language?.toUpperCase()} {getFlagEmoji(movie.language)}
             </p>
-            <p>Voto: {movie.vote}</p>
+            <p className="stars">
+
+                {[...Array(5)].map((_, index) => (
+
+                    index < starRating ? (
+                        <FontAwesomeIcon key={index} icon={faStarFull} color="#FFD700" />
+                    ) : (
+                        <FontAwesomeIcon key={index} icon={faStarEmpty} color="#FFD700" />
+                    )
+
+                ))}
+
+            </p>
+
             <p>Tipo: {movie.type === 'movie' ? '🎬 Film' : '📺 Serie TV'}</p>
 
         </div>

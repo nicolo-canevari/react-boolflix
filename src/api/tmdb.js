@@ -31,6 +31,13 @@ export function getPosterUrl(path) {
 
 }
 
+// Funzione per convertire il voto in stelle (1-5)
+export function getStarRating(vote) {
+
+    return Math.min(Math.max(Math.ceil(vote / 2), 1), 5);
+
+}
+
 // Funzione per cercare i film per titolo
 export function searchMovies(query, language = 'it-IT') {
 
