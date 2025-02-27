@@ -20,12 +20,15 @@ function MovieCard({ movie, onClick }) {
 
     return (
 
-        <div className="movie-card" onClick={() => onClick(movie.id)}>
+        <div className="movie-card" onClick={() => onClick(movie.id, movie.type)}>
 
             <h3>{movie.title}</h3>
-            <p>Titolo originale: {movie.original_title}</p>
-            <p>Lingua: {movie.original_language.toUpperCase()} {getFlagEmoji(movie.original_language)}</p>
-            <p>Voto: {movie.vote_average}</p>
+            <p>Titolo originale: {movie.originalTitle}</p>
+            <p>
+                Lingua: {movie.language?.toUpperCase()} {getFlagEmoji(movie.language)}
+            </p>
+            <p>Voto: {movie.vote}</p>
+            <p>Tipo: {movie.type === 'movie' ? '🎬 Film' : '📺 Serie TV'}</p>
 
         </div>
 

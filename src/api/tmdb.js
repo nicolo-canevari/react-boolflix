@@ -25,12 +25,41 @@ export function searchMovies(query, language = 'it-IT') {
 
     return apiClient.get('/search/movie', { params: { query, language } })
 
-        // Ritorna i dati della risposta
-        .then((response) => response.data)
+        // Restituisco i risultati dei film
+        .then((response) => {
+
+            console.log('Risposta API film:', response);
+            return response.data;
+
+        })
 
         .catch((error) => {
 
-            console.error('Errore nella ricerca film:', error);
+            console.error('Errore nella ricerca film:', error.response || error.message || error);
+            throw error;
+
+        });
+
+}
+
+// Funzione per cercare le serie TV
+export function searchTVShows(query, language = 'it-IT') {
+
+    return apiClient
+
+        .get('/search/tv', { params: { query, language } })
+        // Restituisco i risultati delle serie TV
+        .then(response => {
+
+            console.log('Risposta API serie TV:', response);
+            return response.data;
+
+        })
+
+        .catch((error) => {
+
+            console.error('Errore nella ricerca delle serie TV:', error.response || error.message || error);
+            throw error;
 
         });
 

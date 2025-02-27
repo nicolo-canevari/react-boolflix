@@ -7,10 +7,7 @@ function MovieSearch({ onSearch }) {
 
     const handleSearch = () => {
 
-        if (query.trim()) {
-            onSearch(query);
-        }
-
+        onSearch(query.trim());
     };
 
     return (
@@ -19,7 +16,7 @@ function MovieSearch({ onSearch }) {
 
             <input
                 type="text"
-                placeholder="Cerca un film..."
+                placeholder="Cerca un film o una serie TV..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />

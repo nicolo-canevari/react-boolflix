@@ -14,12 +14,14 @@ function MovieDetailsPage() {
     // Effettuo la chiamata API per ottenere i dettagli del film quando l'ID cambia
     useEffect(() => {
 
-        getMovieDetails(id).then(setMovie);
+        getMovieDetails(id)
+            .then(setMovie)
+            .catch(() => setMovie(null));
 
     }, [id]);
 
     // Mostra un messaggio di caricamento finché i dati non arrivano
-    if (!movie) return <p>Caricamento...</p>;
+    if (!movie) return <p>Errore nella ricerca</p>;
 
     return (
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { searchMovies } from '../api/tmdb';
+import { searchMovies, searchTVShows } from '../api/tmdb';
 import MovieSearch from '../components/MovieSearch';
 import MovieList from '../components/MovieList';
 
@@ -10,36 +10,57 @@ function Home() {
     const [query, setQuery] = useState('');
 
     // Stato per i risultati dei film
-    const [movies, setMovies] = useState([]);
+    const [results, setResults] = useState([]);
 
     // Hook per la navigazione
     const navigate = useNavigate();
 
     // Funzione per gestire la ricerca dei film
-    const handleSearch = async (query) => {
+    const handleSearch = (query) => {
 
         // .trim per rimuovere gli spazi bianchi all'inizio e alla fine della riga
-        if (query.trim()) {
+        if (!query.trim()) return;
 
-            try {
+        searchMovies(query).then((movieData) => {
+            searchTVShows(query).then((tvData) => {
 
-                const data = await searchMovies(query);
-                setMovies(data.results);
+                // Normalizzo i dati per avere lo stesso formato
+                const movies = movieData.results.map(movie => ({
 
-            } catch (error) {
+                    id: movie.id,
+                    title: movie.title,
+                    originalTitle: movie.original_title,
+                    language: movie.original_language,
+                    vote: movie.vote_average,
+                    type: 'movie'
 
-                console.error('Errore nella ricerca dei film:', error);
+                }));
 
-            }
+                const tvShows = tvData.results.map(tv => ({
 
-        }
+                    id: tv.id,
+                    // "name" invece di "title"
+                    title: tv.name,
+                    // "original_name" invece di "original_title"
+                    originalTitle: tv.original_name,
+                    language: tv.original_language,
+                    vote: tv.vote_average,
+                    type: 'tv'
+
+                }));
+
+                // Unisco i risultati
+                setResults([...movies, ...tvShows]);
+
+            });
+
+        });
 
     };
 
-    // Navigazione alla pagina dei dettagli
-    const handleSelectMovie = (movieId) => {
+    const handleSelectMovie = (id, type) => {
 
-        navigate(`/movie/${movieId}`);
+        navigate(`/${type}/${id}`);
 
     };
 
@@ -56,7 +77,7 @@ function Home() {
                 onSearch={handleSearch} />
 
             <MovieList
-                movies={movies}
+                movies={results}
                 onSelectMovie={handleSelectMovie} />
 
         </div>

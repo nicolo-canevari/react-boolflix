@@ -9,7 +9,7 @@ function MovieList({ movies, onSelectMovie }) {
 
             {movies.map((movie) => (
 
-                <MovieCard key={movie.id} movie={movie} onClick={() => onSelectMovie(movie.id)} />
+                <MovieCard key={movie.id} movie={movie} onClick={(id, type) => onSelectMovie(id, type)} />
 
             ))}
 
