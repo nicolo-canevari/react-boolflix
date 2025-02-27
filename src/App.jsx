@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { MovieProvider } from './context/MovieContext';
 import Home from './pages/Home';

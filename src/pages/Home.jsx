@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { searchMovies } from '../api/tmdb';
-// import MovieSearch from '../components/MovieSearch';
+import MovieSearch from '../components/MovieSearch';
 import MovieList from '../components/MovieList';
 
 function Home() {
@@ -33,6 +33,14 @@ function Home() {
             }
 
         }
+
+        // Navigazione alla pagina dei dettagli
+        const handleSelectMovie = (movieId) => {
+
+            navigate(`/movie/${movieId}`);
+
+        };
+
     };
 
     return (
@@ -41,25 +49,10 @@ function Home() {
 
             <h1>BoolFlix 🎬</h1>
 
-            {/* Barra di ricerca */}
-            <div className="search-bar">
-
-                <input
-                    type="text"
-                    placeholder="Cerca un film..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-
-                <button onClick={handleSearch}>Cerca</button>
-
-            </div>
-
-            {/* Lista dei film trovati */}
-            <MovieList movies={movies} />
+            <MovieSearch onSearch={handleSearch} />
+            <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
 
         </div>
-
 
     );
 

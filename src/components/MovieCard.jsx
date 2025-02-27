@@ -1,3 +1,4 @@
+// CARD PER VISUALIZZARE LE INFO DI OGNI FILM
 import { useNavigate } from 'react-router-dom';
 
 function MovieCard({ movie, onClick }) {
