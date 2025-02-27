@@ -3,7 +3,11 @@ import axios from 'axios';
 
 // Chiave API
 const API_KEY = 'b3a14b91e542c6aa644c9b1b827c5b7e';
+// URL Base
 const BASE_URL = 'https://api.themoviedb.org/3';
+// Link immagini copertina
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
+const IMAGE_SIZE = 'w342';
 
 // Creo un'istanza di Axios con la configurazione base
 const apiClient = axios.create({
@@ -19,6 +23,13 @@ const apiClient = axios.create({
     },
 
 });
+
+// Funzione per costruire l'URL della copertina
+export function getPosterUrl(path) {
+
+    return path ? `${IMAGE_BASE_URL}${IMAGE_SIZE}${path}` : null;
+
+}
 
 // Funzione per cercare i film per titolo
 export function searchMovies(query, language = 'it-IT') {

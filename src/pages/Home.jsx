@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { searchMovies, searchTVShows } from '../api/tmdb';
+import { getPosterUrl, searchMovies, searchTVShows } from '../api/tmdb';
 import MovieSearch from '../components/MovieSearch';
 import MovieList from '../components/MovieList';
 
@@ -18,7 +18,7 @@ function Home() {
     // Funzione per gestire la ricerca dei film
     const handleSearch = (query) => {
 
-        // .trim per rimuovere gli spazi bianchi all'inizio e alla fine della riga
+        // la ricerca si interrompe se la query è vuota o contiene solo spazi bianchi
         if (!query.trim()) return;
 
         searchMovies(query).then((movieData) => {
@@ -32,6 +32,7 @@ function Home() {
                     originalTitle: movie.original_title,
                     language: movie.original_language,
                     vote: movie.vote_average,
+                    poster: getPosterUrl(movie.poster_path),
                     type: 'movie'
 
                 }));
@@ -45,6 +46,7 @@ function Home() {
                     originalTitle: tv.original_name,
                     language: tv.original_language,
                     vote: tv.vote_average,
+                    poster: getPosterUrl(tv.poster_path),
                     type: 'tv'
 
                 }));
