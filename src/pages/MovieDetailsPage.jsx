@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieDetails } from '../api/tmbd'
+import { getMovieDetails } from '../api/tmdb'
 
 function MovieDetailsPage() {
 
