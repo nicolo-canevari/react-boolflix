@@ -6,7 +6,7 @@ import { getMovieDetails } from '../api/tmdb'
 function MovieDetailsPage() {
 
     // Estraggo l'ID del film dai parametri dell'URL
-    const { movieid } = useParams();
+    const { id } = useParams();
 
     // Stato locale per memorizzare i dettagli del film
     const [movie, setMovie] = useState(null);
@@ -14,9 +14,9 @@ function MovieDetailsPage() {
     // Effettuo la chiamata API per ottenere i dettagli del film quando l'ID cambia
     useEffect(() => {
 
-        getMovieDetails(movieid).then(setMovie);
+        getMovieDetails(id).then(setMovie);
 
-    }, [movieid]);
+    }, [id]);
 
     // Mostra un messaggio di caricamento finché i dati non arrivano
     if (!movie) return <p>Caricamento...</p>;

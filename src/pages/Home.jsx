@@ -34,14 +34,15 @@ function Home() {
 
         }
 
-        // Navigazione alla pagina dei dettagli
-        const handleSelectMovie = (movieId) => {
+    };
 
-            navigate(`/movie/${movieId}`);
+    // Navigazione alla pagina dei dettagli
+    const handleSelectMovie = (movieId) => {
 
-        };
+        navigate(`/movie/${movieId}`);
 
     };
+
 
     return (
 
@@ -49,8 +50,14 @@ function Home() {
 
             <h1>BoolFlix 🎬</h1>
 
-            <MovieSearch onSearch={handleSearch} />
-            <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
+            <MovieSearch
+                query={query}
+                setQuery={setQuery}
+                onSearch={handleSearch} />
+
+            <MovieList
+                movies={movies}
+                onSelectMovie={handleSelectMovie} />
 
         </div>
 

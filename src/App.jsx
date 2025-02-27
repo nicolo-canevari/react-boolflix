@@ -8,11 +8,11 @@ function App() {
 
   return (
 
-    // MovieProvider wrappa l'app per fornire lo stato globale a tutti i componenti
-    <MovieProvider>
+    // gestisce la navigazione tra le pagine
+    <Router>
 
-      {/* Router gestisce la navigazione tra le pagine */}
-      <Router>
+      {/* wrappa */}
+      <MovieProvider>
 
         <Routes>
 
@@ -23,9 +23,9 @@ function App() {
 
         </Routes>
 
-      </Router>
+      </MovieProvider>
 
-    </MovieProvider>
+    </Router>
 
   );
 
