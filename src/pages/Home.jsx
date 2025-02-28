@@ -31,6 +31,7 @@ function Home() {
                     language: movie.original_language,
                     vote: movie.vote_average,
                     poster: getPosterUrl(movie.poster_path),
+                    overview: movie.overview,
                     type: 'movie'
 
                 }));
@@ -45,6 +46,7 @@ function Home() {
                     language: tv.original_language,
                     vote: tv.vote_average,
                     poster: getPosterUrl(tv.poster_path),
+                    overview: tv.overview,
                     type: 'tv'
 
                 }));
@@ -71,9 +73,20 @@ function Home() {
 
             <Header onSearch={handleSearch} />
 
-            <MovieList
-                movies={results}
-                onSelectMovie={handleSelectMovie} />
+            {/* Scritta che appare nella home prima che parta la ricerca */}
+            {results.length === 0 ? (
+
+                <div className="search-prompt">
+                    Prova a cercare un film o una serie TV
+                </div>
+
+            ) : (
+
+                <MovieList
+                    movies={results}
+                    onSelectMovie={handleSelectMovie} />
+
+            )}
 
         </div>
 

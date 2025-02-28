@@ -12,14 +12,29 @@ function MovieCard({ movie, onClick }) {
 
         const languageToCountry = {
 
-            it: '🇮🇹', // Italiano → Italia
-            fr: '🇫🇷', // Francese → Francia
-            es: '🇪🇸', // Spagnolo → Spagna
-            en: '🇺🇸', // Inglese → Stati Uniti
-            de: '🇩🇪', // Tedesco → Germania
-            jp: '🇯🇵', // Giapponese → Giappone
-            kr: '🇰🇷', // Coreano → Corea del Sud
-            cn: '🇨🇳', // Cinese → Cina
+            it: '🇮🇹', // Italiano
+            fr: '🇫🇷', // Francese
+            es: '🇪🇸', // Spagnolo
+            en: '🇺🇸', // Inglese
+            de: '🇩🇪', // Tedesco
+            ja: '🇯🇵', // Giapponese
+            ko: '🇰🇷', // Coreano
+            zh: '🇨🇳', // Cinese
+            ro: '🇷🇴', // Rumeno
+            ru: '🇷🇺', // Russo
+            pt: '🇵🇹', // Portoghese
+            pt_br: '🇧🇷', // Portoghese brasiliano
+            ar: '🇸🇦', // Arabo
+            hi: '🇮🇳', // Hindi
+            nl: '🇳🇱', // Olandese
+            sv: '🇸🇪', // Svedese
+            da: '🇩🇰', // Danese
+            fi: '🇫🇮', // Finlandese
+            no: '🇳🇴', // Norvegese
+            pl: '🇵🇱', // Polacco
+            tr: '🇹🇷', // Turco
+            el: '🇬🇷', // Greco
+            th: '🇹🇭', // Thailandese
 
         };
 
@@ -54,6 +69,7 @@ function MovieCard({ movie, onClick }) {
             </p>
             <p className="stars">
 
+                Voto:&nbsp;
                 {[...Array(5)].map((_, index) => (
 
                     index < starRating ? (
@@ -67,6 +83,7 @@ function MovieCard({ movie, onClick }) {
             </p>
 
             <p>Tipo: {movie.type === 'movie' ? '🎬 Film' : '📺 Serie TV'}</p>
+            <p className="overview">Overview: {movie.overview}</p>
 
         </div>
 
