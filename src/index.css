@@ -36,10 +36,37 @@ body {
   font-weight: bold;
 }
 
-/* Barra di ricerca */
+/* Barra di ricerca e select generi */
 .search-bar {
   display: flex;
   gap: 10px;
+  align-items: center;
+}
+
+/* Select per i generi */
+.genre-select {
+  padding: 10px;
+  border: 1px solid #e50914;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effetto hover e focus sulla select */
+.genre-select:hover,
+.genre-select:focus {
+  border-color: #ff3d00;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+/* Opzioni della select */
+.genre-select option {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
 }
 
 /* Campo di input della barra di ricerca */

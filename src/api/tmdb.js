@@ -9,6 +9,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 const IMAGE_SIZE = 'w342';
 
+
 // Creo un'istanza di Axios con la configurazione base
 const apiClient = axios.create({
 
@@ -98,4 +99,74 @@ export function getMovieDetails(movieId, language = 'it-IT') {
 
 }
 
+// Funzione per ottenere la lista dei generi (film + serie TV)
+export function getGenres(language = 'it-IT') {
 
+    return apiClient.get('/genre/movie/list', { params: { language } })
+
+        .then((response) => {
+
+            console.log('Generi ottenuti:', response.data.genres);
+            return response.data.genres;
+
+        })
+
+        .catch((error) => {
+
+            console.error('Errore nel recupero dei generi:', error.response || error.message || error);
+            throw error;
+
+        });
+
+}
+
+// Funzione per ottenere i film filtrati per genere
+export function getMoviesByGenre(genreId, language = 'it-IT') {
+
+    return apiClient.get('/discover/movie', {
+        params: {
+            with_genres: genreId,
+            language
+        }
+    })
+
+        .then(response => {
+
+            console.log('Film per genere:', response.data);
+            return response.data;
+
+        })
+
+        .catch((error) => {
+
+            console.error('Errore nel recupero dei film per genere:', error);
+            throw error;
+
+        });
+
+}
+
+// Funzione per ottenere le serie TV filtrate per genere
+export function getTVShowsByGenre(genreId, language = 'it-IT') {
+
+    return apiClient.get('/discover/tv', {
+        params: {
+            with_genres: genreId,
+            language
+        }
+
+    })
+        .then(response => {
+
+            console.log('Serie TV per genere:', response.data);
+            return response.data;
+
+        })
+        .catch((error) => {
+
+            console.error('Errore nel recupero delle serie TV per genere:', error);
+            throw error;
+
+        });
+
+}
