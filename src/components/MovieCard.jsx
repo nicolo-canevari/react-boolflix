@@ -4,7 +4,7 @@ import { faStar, faStar as faStarFull } from '@fortawesome/free-solid-svg-icons'
 import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons';
 import { getStarRating } from '../api/tmdb';
 
-
+// Componente che mostra le informazioni di un film o serie TV
 function MovieCard({ movie, onClick }) {
 
     // Funzione per ottenere la bandiera dalla lingua
@@ -42,12 +42,14 @@ function MovieCard({ movie, onClick }) {
         return languageToCountry[language] || '🏳️';
     }
 
+    // Calcola il numero di stelle da mostrare in base al voto
     const starRating = getStarRating(movie.vote);
 
     return (
 
         <div className="movie-card" onClick={() => onClick(movie.id, movie.type)}>
 
+            {/* Mostra il poster se disponibile, altrimenti mostra un placeholder */}
             {movie.poster ? (
 
                 <img
@@ -62,11 +64,16 @@ function MovieCard({ movie, onClick }) {
 
             )}
 
+            {/* Titolo e informazioni principali */}
             <h3>{movie.title}</h3>
             <p>Titolo originale: {movie.originalTitle}</p>
+
+            {/* Mostra la lingua con l'emoji della bandiera */}
             <p>
                 Lingua: {movie.language?.toUpperCase()} {getFlagEmoji(movie.language)}
             </p>
+
+            {/* Mostra il voto come stelle (1-5) */}
             <p className="stars">
 
                 Voto:&nbsp;
@@ -82,7 +89,9 @@ function MovieCard({ movie, onClick }) {
 
             </p>
 
+            {/* Indica se è un film o una serie TV */}
             <p>Tipo: {movie.type === 'movie' ? '🎬 Film' : '📺 Serie TV'}</p>
+            {/* Mostra la panoramica della trama */}
             <p className="overview">Overview: {movie.overview}</p>
 
         </div>

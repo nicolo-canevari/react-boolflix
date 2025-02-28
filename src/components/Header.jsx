@@ -1,70 +1,22 @@
-import { useEffect, useState } from 'react';
+// HEADER DELLA PAGINA CON LOGO, RICERCA E SELEZIONE GENERE
 import MovieSearch from './MovieSearch';
-import { getGenres } from '../api/tmdb';
+import GenreSelect from './GenreSelect';
 
+// Componente Header che include la barra di ricerca e il selettore di genere
 function Header({ onSearch, onGenreSelect }) {
-
-    const [genres, setGenres] = useState([]);
-
-    // Effettua la chiamata API per ottenere i generi
-    useEffect(() => {
-
-        getGenres()
-
-            .then((data) => {
-
-                // Controlla cosa arriva
-                if (Array.isArray(data)) {
-                    console.log('Generi ricevuti:', data);
-                    setGenres(data);
-
-                } else {
-                    console.error('Formato dati generi non valido:', data);
-                    setGenres([]);
-                }
-
-            })
-
-            .catch((error) => {
-                console.error('Errore nel recupero dei generi:', error);
-                setGenres([]);
-
-            });
-
-    }, []);
 
     return (
 
         <header className="header">
 
+            {/* Logo dell'app */}
             <div className="logo">BOOLFLIX</div>
 
             <div className="search-bar">
 
-                {/* Dropdown dei generi */}
-                <select
-                    className="genre-select"
-                    onChange={(e) => onGenreSelect(e.target.value)}
-                >
-                    <option value="">Tutti i generi</option>
-
-                    {genres.length > 0 ? (
-
-                        genres.map((genre) => (
-                            <option key={genre.id} value={genre.id}>
-                                {genre.name}
-                            </option>
-
-                        ))
-
-                    ) : (
-                        <option disabled>Nessun genere disponibile</option>
-
-                    )}
-
-                </select>
-
-                {/* Componente di ricerca */}
+                {/* Selettore di genere */}
+                <GenreSelect onGenreSelect={onGenreSelect} />
+                {/* Barra di ricerca */}
                 <MovieSearch onSearch={onSearch} />
 
             </div>

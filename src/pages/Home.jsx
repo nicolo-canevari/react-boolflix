@@ -1,3 +1,4 @@
+// PAGINA PRINCIPALE DELL'APPLICAZIONE
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getPosterUrl, searchMovies, searchTVShows, getMoviesByGenre, getTVShowsByGenre } from '../api/tmdb';
@@ -6,30 +7,22 @@ import MovieList from '../components/MovieList';
 
 function Home() {
 
-    // Hook per la navigazione
     const navigate = useNavigate();
-
-    // Stato per i risultati dei film
     const [results, setResults] = useState([]);
-
-    // Hook per il genere 
     const [selectedGenre, setSelectedGenre] = useState('');
 
-
-    // Funzione per gestire la ricerca dei film
+    // Funzione per la ricerca di film e serie TV
     const handleSearch = (query) => {
 
-        // la ricerca si interrompe se la query è vuota o contiene solo spazi bianchi
         if (!query.trim()) return;
 
         searchMovies(query).then((movieData) => {
+
             searchTVShows(query)
 
                 .then((tvData) => {
-
-                    // Normalizzo i dati per avere lo stesso formato
+                    // Mappo i risultati dei film
                     const movies = movieData.results.map(movie => ({
-
                         id: movie.id,
                         title: movie.title,
                         originalTitle: movie.original_title,
@@ -39,15 +32,12 @@ function Home() {
                         overview: movie.overview,
                         type: 'movie',
                         genre_ids: movie.genre_ids || []
-
                     }));
 
+                    // Mappo i risultati delle serie TV
                     const tvShows = tvData.results.map(tv => ({
-
                         id: tv.id,
-                        // "name" invece di "title"
                         title: tv.name,
-                        // "original_name" invece di "original_title"
                         originalTitle: tv.original_name,
                         language: tv.original_language,
                         vote: tv.vote_average,
@@ -55,23 +45,18 @@ function Home() {
                         overview: tv.overview,
                         type: 'tv',
                         genre_ids: tv.genre_ids || []
-
                     }));
 
+                    // Combino i risultati di film e serie TV
                     let combinedResults = [...movies, ...tvShows];
 
-                    // Filtro per genere se selezionato
+                    // Se è selezionato un genere, filtro i risultati
                     if (selectedGenre) {
-
                         combinedResults = combinedResults.filter(item =>
-
                             item.genre_ids.includes(Number(selectedGenre))
-
                         );
-
                     }
 
-                    // Unisco i risultati
                     setResults(combinedResults);
 
                 })
@@ -82,35 +67,33 @@ function Home() {
 
     };
 
+    // Gestione selezione film/serie per navigazione
     const handleSelectMovie = (id, type) => {
 
         navigate(`/${type}/${id}`);
 
     };
 
+    // Gestione selezione genere
     const handleGenreSelect = (genreId) => {
 
         setSelectedGenre(genreId);
-
         console.log('Genere selezionato:', genreId);
 
         if (genreId) {
-
-            getMoviesByGenre(genreId).then((movieData) => {
-
-                const movies = movieData.results.map(movie => ({
-                    id: movie.id,
-                    title: movie.title,
-                    originalTitle: movie.original_title,
-                    language: movie.original_language,
-                    vote: movie.vote_average,
-                    poster: getPosterUrl(movie.poster_path),
-                    overview: movie.overview,
-                    type: 'movie',
-                    genre_ids: movie.genre_ids || []
-                }));
-
-                getTVShowsByGenre(genreId).then((tvData) => {
+            Promise.all([getMoviesByGenre(genreId), getTVShowsByGenre(genreId)])
+                .then(([movieData, tvData]) => {
+                    const movies = movieData.results.map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        originalTitle: movie.original_title,
+                        language: movie.original_language,
+                        vote: movie.vote_average,
+                        poster: getPosterUrl(movie.poster_path),
+                        overview: movie.overview,
+                        type: 'movie',
+                        genre_ids: movie.genre_ids || []
+                    }));
 
                     const tvShows = tvData.results.map(tv => ({
                         id: tv.id,
@@ -125,11 +108,10 @@ function Home() {
                     }));
 
                     setResults([...movies, ...tvShows]);
+
                 })
 
-                    .catch(error => console.error(error));
-
-            })
+                .catch(error => console.error('Errore nel recupero film/serie per genere:', error));
 
         }
 
@@ -139,21 +121,14 @@ function Home() {
 
         <div className="home">
 
+            {/* Header con barra di ricerca e selezione genere */}
             <Header onSearch={handleSearch} onGenreSelect={handleGenreSelect} />
 
-            {/* Scritta che appare nella home prima che parta la ricerca */}
+            {/* Mostra un messaggio o la lista dei risultati */}
             {results.length === 0 ? (
-
-                <div className="search-prompt">
-                    Prova a cercare un film o una serie TV
-                </div>
-
+                <div className="search-prompt">Prova a cercare un film o una serie TV</div>
             ) : (
-
-                <MovieList
-                    movies={results}
-                    onSelectMovie={handleSelectMovie} />
-
+                <MovieList movies={results} onSelectMovie={handleSelectMovie} />
             )}
 
         </div>

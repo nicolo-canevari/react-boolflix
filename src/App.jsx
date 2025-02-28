@@ -8,18 +8,18 @@ function App() {
 
   return (
 
-    // gestisce la navigazione tra le pagine
+    // Configura il router per la navigazione delle pagine
     <Router>
 
-      {/* wrappa */}
+      {/* Wrappa l'app con il provider del contesto per gestire lo stato globale */}
       <MovieProvider>
 
         <Routes>
 
-          {/* Rotta principale che mostra la pagina Home */}
+          {/* Rotta principale che mostra la pagina Home con la lista dei film/serie */}
           <Route path="/" element={<Home />} />
 
-          {/* Rotta che mostra i dettagli del film con ID dinamico */}
+          {/* Rotta per visualizzare i dettagli di un film, con ID dinamico */}
           <Route path="/movie/:id" element={<MovieDetailsPage />} />
 
           {/* Rotta che mostra i dettagli delle serie TV con ID dinamico */}

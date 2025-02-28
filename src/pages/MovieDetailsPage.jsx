@@ -29,8 +29,11 @@ function MovieDetailsPage() {
 
             {/* Mostra il titolo e la descrizione del film */}
             <h1>{movie.title}</h1>
+            {/* Mostra la descrizione del film */}
             <p>{movie.overview}</p>
+            {/* Mostra la lingua originale del film */}
             <p>Lingua originale: {movie.original_language}</p>
+            {/* Mostra il voto medio del film */}
             <p>Voto medio: {movie.vote_average}</p>
 
         </div>

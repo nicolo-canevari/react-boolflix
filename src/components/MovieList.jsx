@@ -11,6 +11,7 @@ function MovieList({ movies, onSelectMovie }) {
 
         <div className="movie-list">
 
+            {/* Sezione film */}
             {moviesOnly.length > 0 && (
 
                 <div className="movie-section">
@@ -19,6 +20,7 @@ function MovieList({ movies, onSelectMovie }) {
 
                     <div className="movie-grid">
 
+                        {/* Mostro ogni film con la MovieCard */}
                         {moviesOnly.map((movie) => (
                             <MovieCard
                                 key={movie.id}
@@ -34,6 +36,7 @@ function MovieList({ movies, onSelectMovie }) {
 
             )}
 
+            {/* Sezione serie TV */}
             {tvShowsOnly.length > 0 && (
 
                 <div className="movie-section">
@@ -42,6 +45,7 @@ function MovieList({ movies, onSelectMovie }) {
 
                     <div className="movie-grid">
 
+                        {/* Mostro ogni serie TV con la MovieCard */}
                         {tvShowsOnly.map((tvShow) => (
 
                             <MovieCard
