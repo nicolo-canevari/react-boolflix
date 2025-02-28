@@ -4,6 +4,196 @@
   box-sizing: border-box;
 }
 
+/* Stile generale del corpo della pagina */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1c1c1c;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Logo dell'header */
+.header .logo {
+  color: #e50914;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Barra di ricerca */
+.search-bar {
+  display: flex;
+  gap: 10px;
+}
+
+/* Campo di input della barra di ricerca */
+.search-bar input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 300px;
+}
+
+/* Pulsante di ricerca */
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e50914;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Testo di invito alla ricerca nella home */
+.search-prompt {
+  color: #fff;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 150px;
+}
+
+/* Lista di film */
+.movie-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  background-color: #333;
+}
+
+/* Sezione film e serie TV */
+.movie-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Titoli delle sezioni */
+.movie-section h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Griglia per visualizzare le card */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* Stile della card */
+.movie-card {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+/* Effetto hover sulla card */
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+/* Immagine del poster del film */
+.movie-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Effetto hover per nascondere il poster */
+.movie-card:hover .movie-poster {
+  opacity: 0;
+}
+
+/* Dettagli del film (titolo, descrizione) */
+.movie-card h3,
+.movie-card p {
+  margin: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+/* Stelle o voto del film */
+.movie-card .stars {
+  display: flex;
+  justify-content: start;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+/* Sfondo e colore al passaggio del mouse */
+.movie-card:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Mostra dettagli al passaggio del mouse */
+.movie-card:hover h3,
+.movie-card:hover p,
+.movie-card:hover .stars {
+  opacity: 1;
+}
+
+/* Centra i dettagli verticalmente nella card */
+.movie-card div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Stile per card senza poster disponibile */
+.no-poster {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+}
+
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #1c1c1c;
@@ -67,11 +257,30 @@ body {
 
 /* Lista di film */
 .movie-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  background-color: #333;
+}
+
+/* Titoli sezioni */
+.movie-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.movie-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.movie-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  padding: 20px;
-  background-color: #333;
 }
 
 /* Stile della card del film */
